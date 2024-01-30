@@ -5,7 +5,7 @@
 
 Feature: Test Automation Rest API User Management
 
-  @apiTest
+  @api
   Scenario: Test Get List Data User Normal
     Given prepare url for "GET_LIST_USERS"
     When hit api get list users
