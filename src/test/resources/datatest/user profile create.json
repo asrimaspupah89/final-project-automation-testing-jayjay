@@ -1,0 +1,19 @@
+{
+  "title": "miss",
+  "firstName": "Rina",
+  "lastName": "Widiana",
+  "picture": "https://randomuser.me/api/portraits/med/women/89.jpg",
+  "gender": "female",
+  "email": "rina.widiana@mail.com",
+  "dateOfBirth": "1945-11-17T06:31:57.367Z",
+  "phone": "087-368-211",
+  "location": {
+    "street": "Jl. AH. Nasution",
+    "city": "Bandung",
+    "state": "Jawa Barats",
+    "country": "Indonesia",
+    "timezone": "+6:00"
+  },
+  "registerDate": "2023-10-18T21:02:07.872Z",
+  "updatedDate": "2024-01-15T21:02:07.872Z"
+}
