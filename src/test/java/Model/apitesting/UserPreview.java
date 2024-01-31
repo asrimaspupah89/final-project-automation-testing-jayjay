@@ -1,4 +1,4 @@
-package Model;
+package Model.apitesting;
 
 public class UserPreview {
     private String id;

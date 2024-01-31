@@ -1,4 +1,4 @@
-package Model;
+package Model.apitesting;
 
 public class Location {
     private String street;
