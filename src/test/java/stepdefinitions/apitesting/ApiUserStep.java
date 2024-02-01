@@ -2,11 +2,15 @@ package stepdefinitions.apitesting;
 
 import Model.apitesting.UserProfile;
 import helper.SetUpEndPoint;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import testlogic.apitesting.APIUserTest;
 import testlogic.apitesting.APITestProcessGeneric;
+import testlogic.apitesting.request.EndPoint;
+
+import java.text.ParseException;
 
 public class ApiUserStep {
     APIUserTest apiUser;
@@ -60,39 +64,45 @@ public class ApiUserStep {
     }
 
     /***************************** Step Operation For Validation API Post Create User ***************************** */
-
     @When("hit api post create new user")
     public void hitApiPostCreateNewUser() {
         dataTestCreateUser = APITestProcessGeneric.prepareDataUserTestPost();
         apiUser.hitAPIPostNewUser(dataTestCreateUser);
     }
     @Then("validation response body post create new user")
-    public void validationResponseBodyPostCreateNewUser() {
+    public void validationResponseBodyPostCreateNewUser() throws ParseException {
         apiUser.checkResponseBodyCreateUser(dataTestCreateUser);
     }
 
-    @When("hit api update profile user by id {string}")
-    public void hitApiUpdateProfileUserById(String idUser) {
+    @And("hit api post create new user for manipulation data")
+    public void hitApiPostCreateNewUserForManipulationData() {
+        dataTestCreateUser = APITestProcessGeneric.prepareDataUserTestPost();
+        currentUserID = apiUser.hitAPIPostNewUser(EndPoint.CREATE_NEW_USER, dataTestCreateUser);
+        System.out.println("current id after created : " + currentUserID);
+    }
+
+    /***************************** Step Operation For Validation API Put Update User ***************************** */
+    @When("hit api update profile user")
+    public void hitApiUpdateProfileUserById() {
         dataTestUpdateUser = APITestProcessGeneric.prepareDataUserTestUpdate();
-        apiUser.hitAPIUpdateProfileUser(dataTestUpdateUser, idUser);
-        currentUserID = idUser;
+        apiUser.hitAPIUpdateProfileUser(dataTestUpdateUser, currentUserID);
     }
-
     @Then("validation response body update user")
-    public void validationResponseBodyUpdateUser() {
-        apiUser.checkResponseBodyUpdateProfileUser(dataTestCreateUser, currentUserID);
+    public void validationResponseBodyUpdateUser() throws ParseException {
+        apiUser.checkResponseBodyUpdateProfileUser(dataTestUpdateUser, currentUserID);
     }
 
-    /***************************** Step Operation For Validation API Post Update User ***************************** */
-    @When("hit api delete user for id {string}")
-    public void hitApiDeleteUserForId(String idUser) {
-        currentUserID = idUser;
-        apiUser.hitAPIDeleteUserById(idUser);
+    /***************************** Step Operation For Validation API Delete User ***************************** */
+    @When("hit api delete user")
+    public void hitApiDeleteUserForId() {
+        apiUser.hitAPIDeleteUserById(currentUserID);
     }
-
     @Then("validation response body delete user")
     public void validationResponseBodyDeleteUser() {
         apiUser.checkResponseBodyDeleteUser(currentUserID);
     }
-
+    @When("hit api get profile user after deleted")
+    public void hitApiGetProfileUserAfterDeleted() {
+        apiUser.hitAPIGetProfileUser(currentUserID);
+    }
 }

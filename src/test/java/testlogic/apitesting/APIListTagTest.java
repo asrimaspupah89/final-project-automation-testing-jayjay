@@ -2,6 +2,7 @@ package testlogic.apitesting;
 
 import helper.SetUpEndPoint;
 import io.restassured.response.Response;
+import org.testng.Assert;
 import testlogic.apitesting.request.RequestAPITagManagement;
 
 public class APIListTagTest {
@@ -19,6 +20,6 @@ public class APIListTagTest {
     public void checkResponseBodyListTags() {
         System.out.println("test logic for check response body get List user");
         // please add code detail
-
+        Assert.assertNotNull(res.getBody().jsonPath().get("data"));
     }
 }

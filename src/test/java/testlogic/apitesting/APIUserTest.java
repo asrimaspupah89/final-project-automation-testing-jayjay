@@ -1,6 +1,7 @@
 package testlogic.apitesting;
 
 import Model.apitesting.UserProfile;
+import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import helper.SetUpEndPoint;
@@ -11,6 +12,10 @@ import org.json.JSONObject;
 import org.testng.Assert;
 import testlogic.apitesting.APITestProcessGeneric;
 import testlogic.apitesting.request.RequestAPIUserManagement;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -74,9 +79,18 @@ public class APIUserTest {
         Assert.assertEquals(actualMessage, expectedMessage);
     }
 
-    public void hitAPIPostNewUser(UserProfile dataUser) {
+    public String hitAPIPostNewUser(UserProfile dataUser) {
         res = RequestAPIUserManagement.postCreateUser(SetUpEndPoint.getURL(), dataUser); //call API Post New User
         System.out.println(res.getBody().asString()); // logging response API
+
+        return res.getBody().jsonPath().get("id");
+    }
+
+    public String hitAPIPostNewUser(String endPoint, UserProfile dataUser) {
+        res = RequestAPIUserManagement.postCreateUser(endPoint, dataUser); //call API Post New User
+        System.out.println(res.getBody().asString()); // logging response API
+
+        return res.getBody().jsonPath().get("id");
     }
 
     public void hitAPIUpdateProfileUser(UserProfile dataUser, String idUser) {
@@ -84,14 +98,62 @@ public class APIUserTest {
         System.out.println(res.getBody().asString()); // logging response API
     }
 
-    public void checkResponseBodyCreateUser(UserProfile dataTestUser) {
+    public void checkResponseBodyCreateUser(UserProfile dataTestUser) throws ParseException {
         System.out.println("test logic for check response body create user");
         // please add code detail
+        Gson json = new Gson();
+        UserProfile actualData = json.fromJson(res.getBody().asString(), UserProfile.class);
+        System.out.print("Actual Data : ");
+        System.out.println(json.toJson(actualData));
+        System.out.print("Test Data : ");
+        System.out.println(json.toJson(dataTestUser));
+        Assert.assertEquals(actualData.getTitle(), dataTestUser.getTitle());
+        Assert.assertEquals(actualData.getFirstName(), dataTestUser.getFirstName());
+        Assert.assertEquals(actualData.getLastName(), dataTestUser.getLastName());
+        Assert.assertEquals(actualData.getPicture(), dataTestUser.getPicture());
+        Assert.assertEquals(actualData.getGender(), dataTestUser.getGender());
+        Assert.assertEquals(actualData.getEmail(), dataTestUser.getEmail());
+        Assert.assertEquals(actualData.getDateOfBirth(), dataTestUser.getDateOfBirth());
+        Assert.assertEquals(actualData.getPhone(), dataTestUser.getPhone());
+        Assert.assertEquals(actualData.getLocation().getStreet(), dataTestUser.getLocation().getStreet());
+        Assert.assertEquals(actualData.getLocation().getCity(), dataTestUser.getLocation().getCity());
+        Assert.assertEquals(actualData.getLocation().getState(), dataTestUser.getLocation().getState());
+        Assert.assertEquals(actualData.getLocation().getCountry(), dataTestUser.getLocation().getCountry());
+        Assert.assertEquals(actualData.getLocation().getTimezone(), dataTestUser.getLocation().getTimezone());
+        SimpleDateFormat sdfTime = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+        SimpleDateFormat sdfDate = new SimpleDateFormat("yyyy-MM-dd");
+        Assert.assertEquals(sdfDate.format(sdfTime.parse(actualData.getRegisterDate())), sdfDate.format(new Date()));
+        Assert.assertEquals(sdfDate.format(sdfTime.parse(actualData.getUpdatedDate())), sdfDate.format(new Date()));
+
     }
 
-    public void checkResponseBodyUpdateProfileUser(UserProfile dataTestUser, String idUserUpdate) {
+    public void checkResponseBodyUpdateProfileUser(UserProfile dataTestUser, String idUserUpdate) throws ParseException {
         System.out.println("test logic for check response body update user");
         // please add code detail
+        Gson json = new Gson();
+        UserProfile actualData = json.fromJson(res.getBody().asString(), UserProfile.class);
+        System.out.print("Actual Data : ");
+        System.out.println(json.toJson(actualData));
+        System.out.print("Test Data : ");
+        System.out.println(json.toJson(dataTestUser));
+        Assert.assertEquals(actualData.getId(), idUserUpdate);
+        Assert.assertEquals(actualData.getTitle(), dataTestUser.getTitle());
+        Assert.assertEquals(actualData.getFirstName(), dataTestUser.getFirstName());
+        Assert.assertEquals(actualData.getLastName(), dataTestUser.getLastName());
+        Assert.assertEquals(actualData.getPicture(), dataTestUser.getPicture());
+        Assert.assertEquals(actualData.getGender(), dataTestUser.getGender());
+        Assert.assertEquals(actualData.getDateOfBirth(), dataTestUser.getDateOfBirth());
+        Assert.assertEquals(actualData.getPhone(), dataTestUser.getPhone());
+        Assert.assertEquals(actualData.getLocation().getStreet(), dataTestUser.getLocation().getStreet());
+        Assert.assertEquals(actualData.getLocation().getCity(), dataTestUser.getLocation().getCity());
+        Assert.assertEquals(actualData.getLocation().getState(), dataTestUser.getLocation().getState());
+        Assert.assertEquals(actualData.getLocation().getCountry(), dataTestUser.getLocation().getCountry());
+        Assert.assertEquals(actualData.getLocation().getTimezone(), dataTestUser.getLocation().getTimezone());
+        SimpleDateFormat sdfTime = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+        SimpleDateFormat sdfDate = new SimpleDateFormat("yyyy-MM-dd");
+        Assert.assertEquals(sdfDate.format(sdfTime.parse(actualData.getRegisterDate())), sdfDate.format(new Date ()));
+        Assert.assertEquals(sdfDate.format(sdfTime.parse(actualData.getUpdatedDate())), sdfDate.format(new Date()));
+
     }
 
     public void hitAPIDeleteUserById(String idUser) {
@@ -103,5 +165,8 @@ public class APIUserTest {
     public void checkResponseBodyDeleteUser(String idUserDelete) {
         System.out.println("test logic for check response body delete user");
         // please add code detail
+        System.out.println("id Delete:" + res.getBody());
+        Assert.assertNotNull(res.getBody().jsonPath().get("id"));
+
     }
 }

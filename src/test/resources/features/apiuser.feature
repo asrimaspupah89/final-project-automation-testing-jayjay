@@ -40,8 +40,8 @@ Feature: Test Automation Rest API User Management
   @api
   Scenario: Test update user normal
     Given prepare url for "UPDATE_USER"
-    And hit api get profile user by id "65bb07a7a88f6f519cb0cc55"
-    When hit api update profile user by id "65bb07a7a88f6f519cb0cc55"
+    And hit api post create new user for manipulation data
+    When hit api update profile user
     Then validation status code api user is equals 200
     Then validation response body update user
     Then validation response json with JSONSchema "update_profile_user_normal.json"
@@ -49,10 +49,10 @@ Feature: Test Automation Rest API User Management
   @api
   Scenario: Test delete user normal
     Given prepare url for "DELETE_USER"
-    And hit api get profile user by id "65bb2c2213492c3665fbd2f2"
-    When hit api delete user for id "65bb2c2213492c3665fbd2f2"
+    And hit api post create new user for manipulation data
+    When hit api delete user
     Then validation status code api user is equals 200
     Then validation response body delete user
     Then validation response json with JSONSchema "delete_user_normal.json"
-    Then hit api get profile user by id "65bb2c2213492c3665fbd2f2"
+    Then hit api get profile user after deleted
     Then validation response body get profile user with message "RESOURCE_NOT_FOUND"

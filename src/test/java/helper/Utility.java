@@ -40,7 +40,7 @@ public class Utility {
     }
 
     // generate random data with 8 lenght for username and password
-    // yg diperbolehkan adakah huruf dan angka -- still error
+    // yg diperbolehkan adalah huruf dan angka -- still error
     public static String generateRandomData() {
         String allowedChars = "abcdefghijklmnopqrstuvwxyz" + "1234567890" + "_-.";
         String data = RandomStringUtils.randomAlphanumeric(8); // Panjang email 10 karakter
@@ -53,6 +53,6 @@ public class Utility {
         String email = "";
         String temp = RandomStringUtils.randomAlphanumeric(10); // Panjang email 10 karakter
         email = temp + "@testdata.com";
-        return email;
+        return email.toLowerCase();
     }
 }
