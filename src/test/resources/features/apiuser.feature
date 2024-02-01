@@ -36,3 +36,12 @@ Feature: Test Automation Rest API User Management
     Then validation status code is equals 200
     Then validation response body post create new user
     Then validation response json with JSONSchema "post_create_user_normal.json"
+
+  @api
+  Scenario: Test update user normal
+    Given prepare url for "UPDATE_USER"
+    And hit api get profile user by id "65bb07a7a88f6f519cb0cc55"
+    When hit api update profile user by id "65bb07a7a88f6f519cb0cc55"
+    Then validation status code is equals 200
+    Then validation response body update user
+    Then validation response json with JSONSchema "update_profile_user_normal.json"

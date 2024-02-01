@@ -25,10 +25,10 @@ public class APITestProcessGeneric {
     /*check status code response same with  status code expected*/
     public static void validationStatusCode(Response currentRes, int expectedStatusCode){
         System.out.println("check status code : " + expectedStatusCode);
-        Assert.assertEquals(expectedStatusCode, currentRes.getStatusCode());
+        Assert.assertEquals(currentRes.getStatusCode(), expectedStatusCode);
     }
 
-    public static UserProfile prepareDataUserTest() {
+    public static UserProfile prepareDataUserTestPost() {
         UserProfile dataUser = new UserProfile();
         Location dataLocation   = new Location();
 
@@ -63,7 +63,46 @@ public class APITestProcessGeneric {
         dataLocation.setCity(city);
         dataLocation.setState(state);
         dataLocation.setCountry(country);
-        dataLocation.setTimezone(country);
+        dataLocation.setTimezone(timezone);
+        dataUser.setLocation(dataLocation);
+
+        return dataUser;
+    }
+
+    public static UserProfile prepareDataUserTestUpdate() {
+        UserProfile dataUser = new UserProfile();
+        Location dataLocation   = new Location();
+
+        // prepare data test user
+        // information user
+        String title        = "mr";
+        String firstName    = "Andika test";
+        String lastName     = "Update User";
+        String picture      = "https://randomuser.me/api/portraits/med/women/89.jpg";
+        String gender       = "male";
+        String dateOfBirth  = "1945-11-17T06:31:57.367Z";
+        String phone        = "087-368-200";
+
+        dataUser.setTitle(title);
+        dataUser.setFirstName(firstName);
+        dataUser.setLastName(lastName);
+        dataUser.setPicture(picture);
+        dataUser.setGender(gender);
+        dataUser.setDateOfBirth(dateOfBirth);
+        dataUser.setPhone(phone);
+
+        // location
+        String street       = "Jl. Mataram";
+        String city         = "Aceh";
+        String state        = "Sumatera";
+        String country      = "Indonesia";
+        String timezone     = "+10:00";
+
+        dataLocation.setStreet(street);
+        dataLocation.setCity(city);
+        dataLocation.setState(state);
+        dataLocation.setCountry(country);
+        dataLocation.setTimezone(timezone);
         dataUser.setLocation(dataLocation);
 
         return dataUser;

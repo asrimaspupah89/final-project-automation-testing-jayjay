@@ -64,17 +64,33 @@ public class APIUserTest {
         assertThat(userProfile.get("gender")).isIn("male", "female", ""); // check gender value between male, female, and blank
     }
 
-    public void checkResponseBodyGetProfileUserFailed(String message) {
+    public void checkResponseBodyGetProfileUserFailed(String expectedMessage) {
         System.out.println("validation response body profile user process failed");
         JSONObject notification = new JSONObject(res.getBody().asString()); // get data json in object
 
         // verify data
-        String messageActual = notification.get("error").toString();
-        System.out.println("actual message: " + messageActual);
+        String actualMessage = notification.get("error").toString();
+        System.out.println("actual message: " + actualMessage);
+        Assert.assertEquals(actualMessage, expectedMessage);
     }
 
     public void hitAPIPostNewUser(UserProfile dataUser) {
         res = RequestAPIUserManagement.postCreateUser(SetUpEndPoint.getURL(), dataUser); //call API Post New User
         System.out.println(res.getBody().asString()); // logging response API
+    }
+
+    public void hitAPIUpdateProfileUser(UserProfile dataUser, String idUser) {
+        res = RequestAPIUserManagement.putUser(SetUpEndPoint.getURL(), dataUser, idUser); //call API Put User by Id
+        System.out.println(res.getBody().asString()); // logging response API
+    }
+
+    public void checkResponseBodyCreateUser(UserProfile dataTestUser) {
+        System.out.println("test logic for check response body create user");
+        // please add code detail
+    }
+
+    public void checkResponseBodyUpdateProfileUser(UserProfile dataTestUser) {
+        System.out.println("test logic for check response body update user");
+        // please add code detail
     }
 }

@@ -10,6 +10,7 @@ import testlogic.apitesting.APITestProcessGeneric;
 
 public class ApiUserStep {
     APIUserTest apiUser;
+    UserProfile dataTestCreateUser, dataTestUpdateUser;
 
     public ApiUserStep(){
         apiUser = new APIUserTest();
@@ -61,11 +62,23 @@ public class ApiUserStep {
 
     @When("hit api post create new user")
     public void hitApiPostCreateNewUser() {
-        UserProfile dataTestCreateUser = APITestProcessGeneric.prepareDataUserTest();
+        dataTestCreateUser = APITestProcessGeneric.prepareDataUserTestPost();
         apiUser.hitAPIPostNewUser(dataTestCreateUser);
     }
     @Then("validation response body post create new user")
     public void validationResponseBodyPostCreateNewUser() {
-        System.out.println("step check response body create user");
+        apiUser.checkResponseBodyCreateUser(dataTestCreateUser);
+    }
+
+    @When("hit api update profile user by id {string}")
+    public void hitApiUpdateProfileUserById(String idUser) {
+        dataTestUpdateUser = APITestProcessGeneric.prepareDataUserTestUpdate();
+        apiUser.hitAPIUpdateProfileUser(dataTestUpdateUser, idUser);
+    }
+
+    @Then("validation response body update user")
+    public void validationResponseBodyUpdateUser() {
+        System.out.println("step check response body update user");
+        apiUser.checkResponseBodyUpdateProfileUser(dataTestCreateUser);
     }
 }

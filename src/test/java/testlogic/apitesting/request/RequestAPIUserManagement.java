@@ -36,4 +36,13 @@ public class RequestAPIUserManagement {
         setUpHeader(); // set up header
         return  request.body(payload.toJson(dataUser)).when().post(endpoint); // call API create user
     }
+
+    public static Response putUser(String url, UserProfile dataUserUpdate, String idUser) {
+        String endpoint = url + idUser;
+        Gson payload = new Gson();
+        System.out.println("Gson :" + payload.toJson(dataUserUpdate));
+        System.out.println(endpoint);
+        setUpHeader(); // set up header
+        return  request.body(payload.toJson(dataUserUpdate)).when().put(endpoint); // call API create user
+    }
 }
