@@ -1,7 +1,7 @@
-# final project automated-web-testing-jayjay
+# Final project automated-web-testing-jayjay
 Projek automation testing untuk menguji web product store (https://www.demoblaze.com/) dan api untuk management user dan get list api tag pada tautan https://dummyapi.io/. Proyek ini dikembangkan menggunakan bahasa java (pembuatan script test) dan Groovy (build management)
 
-# build With
+# Build With
 Proyek pengujian otomatis melibatkan enam buah library yang dibutuhkan.
 - cucumber framework
 - selenium framework
@@ -130,11 +130,12 @@ Tujuan project adalah proses pengujian automation web dab api, sehingga kode pro
           {nama halaman}.feature
     
 ```
-- package helper berisi property supporting project, inisiasi driver web dan fungsi-fungsi umum untuk mendukung eksekusi pengujian
-- package runner berisi class java untuk pengaturan eksekusi pengujian dan pengaturan test report
+- package helper berisi property supporting project, inisiasi driver web dan fungsi-fungsi umum untuk mendukung eksekusi pengujian.
+- package model berisi class java yang menampung data pengujian. Data tersebut digunakan sebagai object yang akan diparsing dari steff definition menuju test logic
+- package runner berisi class java untuk pengaturan eksekusi pengujian dan pengaturan test report.
 - package stepdefinitions berisi kumpulan fungsi yang menghubungkan Gehrkin Steo dengan logika pemgogramannya
 - package testlogic berisi test pemrograman dalam bentuk lower code yang akan menjalankan scenario step. 
-- package feature berisi daftar file yang mengandung skenario pengujian dalam bahasa Gherkin
+- package feature berisi daftar file yang mengandung skenario pengujian dalam bahasa Gherkin.
 
 # Struktur Pipeline Automation Testing Menggunakan Workflow
 Proyek ini sudah menerapkan continous integration testing ketika terjadi perubahan kode program saat melakukan push ke GitHub [master], strtukr jobs yang dilakukan adalah
@@ -186,18 +187,18 @@ Sebelum menjalankan test case, diperlukan persiapan data test:
 
 # Software Under test
 Pengujian dilakukan pada aplikasi web Product Store yang dapat diakses pada https://www.demoblaze.com/
-[] Fitur autentikasi meliputi Sign Up, Sign In, LogOut
-[] Fitur send message
-[] Fitur play video pada menu About Us
-[] Fungsi penambahan item product ke keranjang (Cart) pada halaman Landing Page
-[] Fungsi Purchase Order pada halaman Cart
+* Fitur autentikasi meliputi Sign Up, Sign In, LogOut
+* Fitur send message
+* Fitur play video pada menu About Us
+* Fungsi penambahan item product ke keranjang (Cart) pada halaman Landing Page
+* Fungsi Purchase Order pada halaman Cart
 
 Sementara, pada pengujian API menggunakan api management user dan get list Tag
-[] hit api get list user
-[] hit api get profile user by id
-[] hit api post new user
-[] hit api update user by id
-[] hit api delete user by id
+* hit api get list user
+* hit api get profile user by id
+* hit api post new user
+* hit api update user by id
+* hit api delete user by id
 
 # Test Case
 Pembuatan test case meliputi test positif dan test negatif, yaitu
@@ -227,11 +228,11 @@ Dosen Informatika Jurusan Teknik Komputer dan Informatika</br>
 Politeknik Negeri Bandung</br>
 </span>
 
-# Acknowledgments
+# Reference
 Daftar resource yang dapat dipelajari
 - <a href="https://www.selenium.dev/documentation/">Selenium documentation</a>
 - <a href="https://cucumber.io/docs/cucumber/">Cucumber documentation</a>
 - <a href="https://www.javadoc.io/doc/org.testng/testng/6.8.17/org/testng/Assert.html">TestNg documentation</a>
 - <a href="https://gradle.org/install/">Tutorial Gradle Instalasi</a>
 - <a href="https://www.youtube.com/playlist?list=PL-CtdCApEFH8yGJzfU_gners0ybO4MlrV">Gradle Tutotrial</a>
-- <a href="https://www.javadoc.io/doc/org.testng/testng/6.8.17/org/testng/Assert.html"></a>
+- <a href="https://www.javadoc.io/doc/org.testng/testng/6.8.17/org/testng/Assert.html">Testng Documentation</a>
