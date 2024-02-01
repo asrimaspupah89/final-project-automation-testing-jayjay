@@ -1,5 +1,6 @@
 package testlogic.apitesting;
 
+import Model.apitesting.UserProfile;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import helper.SetUpEndPoint;
@@ -70,5 +71,10 @@ public class APIUserTest {
         // verify data
         String messageActual = notification.get("error").toString();
         System.out.println("actual message: " + messageActual);
+    }
+
+    public void hitAPIPostNewUser(UserProfile dataUser) {
+        res = RequestAPIUserManagement.postCreateUser(SetUpEndPoint.getURL(), dataUser); //call API Post New User
+        System.out.println(res.getBody().asString()); // logging response API
     }
 }

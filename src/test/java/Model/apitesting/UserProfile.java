@@ -12,6 +12,17 @@ public class UserProfile {
     private String phone;
     private Location location;
 
+    // date info
+    private String registerDate; // format value YYYY-MM-DDThh:mm:ss
+    private String updatedDate; // format value YYYY-MM-DDThh:mm:ss
+
+    public UserProfile(){
+    }
+
+    public UserProfile(Location location){
+        this.location = location;
+    }
+
     public String getId() {
         return id;
     }
@@ -108,12 +119,6 @@ public class UserProfile {
         this.updatedDate = updatedDate;
     }
 
-    // date info
-    private String registerDate; // format value YYYY-MM-DDThh:mm:ss
-    private String updatedDate; // format value YYYY-MM-DDThh:mm:ss
 
-    public UserProfile(Location location){
-        this.location = location;
-    }
 
 }

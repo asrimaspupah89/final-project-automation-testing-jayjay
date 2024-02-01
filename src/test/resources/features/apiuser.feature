@@ -28,3 +28,11 @@ Feature: Test Automation Rest API User Management
     Then validation status code is equals 404
     Then validation response body get profile user failed with message "RESOURCE_NOT_FOUND"
     Then validation response json with JSONSchema "get_profile_user_not_found.json"
+
+  @api
+  Scenario: Test create new user normal
+    Given prepare url for "CREATE_NEW_USER"
+    When hit api post create new user
+    Then validation status code is equals 200
+    Then validation response body post create new user
+    Then validation response json with JSONSchema "post_create_user_normal.json"

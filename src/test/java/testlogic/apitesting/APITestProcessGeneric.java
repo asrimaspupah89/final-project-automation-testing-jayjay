@@ -1,5 +1,8 @@
 package testlogic.apitesting;
 
+import Model.apitesting.Location;
+import Model.apitesting.UserProfile;
+import helper.Utility;
 import io.restassured.module.jsv.JsonSchemaValidator;
 import io.restassured.response.Response;
 import org.testng.Assert;
@@ -23,5 +26,46 @@ public class APITestProcessGeneric {
     public static void validationStatusCode(Response currentRes, int expectedStatusCode){
         System.out.println("check status code : " + expectedStatusCode);
         Assert.assertEquals(expectedStatusCode, currentRes.getStatusCode());
+    }
+
+    public static UserProfile prepareDataUserTest() {
+        UserProfile dataUser = new UserProfile();
+        Location dataLocation   = new Location();
+
+        // prepare data test user
+        // information user
+        String title        = "miss";
+        String firstName    = "Mahardika test";
+        String lastName     = "Create User";
+        String picture      = "https://randomuser.me/api/portraits/med/women/89.jpg";
+        String gender       = "female";
+        String email        = Utility.generateRandomEmail(); // generate email
+        String dateOfBirth  = "1945-11-17T06:31:57.367Z";
+        String phone        = "087-368-211";
+
+        dataUser.setTitle(title);
+        dataUser.setFirstName(firstName);
+        dataUser.setLastName(lastName);
+        dataUser.setPicture(picture);
+        dataUser.setGender(gender);
+        dataUser.setEmail(email);
+        dataUser.setDateOfBirth(dateOfBirth);
+        dataUser.setPhone(phone);
+
+        // location
+        String street       = "Jl. Situ Raja";
+        String city         = "Malang";
+        String state        = "Jawa Timur";
+        String country      = "Indonesia";
+        String timezone     = "+6:00";
+
+        dataLocation.setStreet(street);
+        dataLocation.setCity(city);
+        dataLocation.setState(state);
+        dataLocation.setCountry(country);
+        dataLocation.setTimezone(country);
+        dataUser.setLocation(dataLocation);
+
+        return dataUser;
     }
 }
