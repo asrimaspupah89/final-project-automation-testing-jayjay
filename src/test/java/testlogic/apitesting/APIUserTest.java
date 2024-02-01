@@ -33,14 +33,42 @@ public class APIUserTest {
 
     /* check response body lis user consist of data (id, title, firstName, lastName, picture), total, page, and limit */
     public void checkResponseBodyListUser(){
-        System.out.println("validation response body process");
-        JSONArray data = new JSONArray(res.getBody().jsonPath().getList("data"));
+        System.out.println("validation response body list user process");
+        JSONArray data = new JSONArray(res.getBody().jsonPath().getList("data")); // get data json in array
         for(int i=0; i<data.length(); i++){
-            JSONObject user = (JSONObject) data.get(i);
+            JSONObject user = (JSONObject) data.get(i); // get element array
+
+            // verify data
             Assert.assertNotNull(user.get("id"));
-            assertThat(user.get("title")).isIn("mr", "ms", "mrs", "miss", "dr", "");
-            Assert.assertNotNull(user.get("firstName"));
-            Assert.assertNotNull(user.get("lastName"));
+            assertThat(user.get("title")).isIn("mr", "ms", "mrs", "miss", "dr", ""); // check title value between mr, ms, mrs, miss, dr, and blank
+            Assert.assertNotNull(user.get("firstName")); // check first name not null
+            Assert.assertNotNull(user.get("lastName")); // check last name not null
         }
+    }
+
+    public void hitAPIGetProfileUser(String idUser) {
+        res = RequestAPIUserManagement.getProfileUser(SetUpEndPoint.getURL(), idUser); //call API Get List User
+        System.out.println(res.getBody().asString()); // logging response API
+    }
+
+    public void checkResponseBodyProfileUser() {
+        System.out.println("validation response body profile user process normal");
+        JSONObject userProfile = new JSONObject(res.getBody().asString()); // get data json in object
+
+        // verify data
+        Assert.assertNotNull(userProfile.get("id"));
+        assertThat(userProfile.get("title")).isIn("mr", "ms", "mrs", "miss", "dr", ""); // check title value between mr, ms, mrs, miss, dr, and blank
+        Assert.assertNotNull(userProfile.get("firstName")); // check first name not null
+        Assert.assertNotNull(userProfile.get("lastName")); // check last name not null
+        assertThat(userProfile.get("gender")).isIn("male", "female", ""); // check gender value between male, female, and blank
+    }
+
+    public void checkResponseBodyGetProfileUserFailed(String message) {
+        System.out.println("validation response body profile user process failed");
+        JSONObject notification = new JSONObject(res.getBody().asString()); // get data json in object
+
+        // verify data
+        String messageActual = notification.get("error").toString();
+        System.out.println("actual message: " + messageActual);
     }
 }

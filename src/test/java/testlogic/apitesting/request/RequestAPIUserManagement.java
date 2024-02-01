@@ -19,9 +19,10 @@ public class RequestAPIUserManagement {
         return request.when().get(endpoint); // call API to get list user
     }
 
-    public static Response getSingleUserById(String url, int idUser) {
+    public static Response getProfileUser(String url, String idUser) {
         setUpHeader(); // set up header
         String endpoint = url + idUser; // assign end point for get current user id
-        return request.when().get(endpoint); // call API to get single user
+        System.out.println("Final Endpoint : " + endpoint);
+        return request.when().get(endpoint); // call API to get profile user
     }
 }
