@@ -33,7 +33,7 @@ public class APIUserTest {
     }
 
     /* check response body lis user consist of data (id, title, firstName, lastName, picture), total, page, and limit */
-    public void checkResponseBodyListUser(){
+    public void checkResponseBodyListUsers(){
         System.out.println("validation response body list user process");
         JSONArray data = new JSONArray(res.getBody().jsonPath().getList("data")); // get data json in array
         for(int i=0; i<data.length(); i++){

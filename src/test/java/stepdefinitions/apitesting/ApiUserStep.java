@@ -27,7 +27,7 @@ public class ApiUserStep {
         // check response data using Json Schema format
         APITestProcessGeneric.validationResponseData(apiUser.getRes(), dataType);
     }
-    @Then("validation status code is equals {int}")
+    @Then("validation status code api user is equals {int}")
     public void validation_status_code_is_equals(Integer statusCode) {
         // check status response same with param statusCode
         APITestProcessGeneric.validationStatusCode(apiUser.getRes(), statusCode);
@@ -42,7 +42,7 @@ public class ApiUserStep {
     @Then("validation response body get list users")
     public void validation_response_body_get_list_users() {
         // check response body not null and field gender filled with female or male, also field status filled with active or inactive
-        apiUser.checkResponseBodyListUser();
+        apiUser.checkResponseBodyListUsers();
     }
 
     /***************************** Step Operation For Validation API Get Profile User ***************************** */
@@ -94,4 +94,5 @@ public class ApiUserStep {
     public void validationResponseBodyDeleteUser() {
         apiUser.checkResponseBodyDeleteUser(currentUserID);
     }
+
 }
