@@ -89,8 +89,19 @@ public class APIUserTest {
         // please add code detail
     }
 
-    public void checkResponseBodyUpdateProfileUser(UserProfile dataTestUser) {
+    public void checkResponseBodyUpdateProfileUser(UserProfile dataTestUser, String idUserUpdate) {
         System.out.println("test logic for check response body update user");
+        // please add code detail
+    }
+
+    public void hitAPIDeleteUserById(String idUser) {
+        res = RequestAPIUserManagement.deleteUserById(SetUpEndPoint.getURL(), idUser);
+        System.out.println("response after hit API delete");
+        System.out.println(res.getBody().asString());
+    }
+
+    public void checkResponseBodyDeleteUser(String idUserDelete) {
+        System.out.println("test logic for check response body delete user");
         // please add code detail
     }
 }

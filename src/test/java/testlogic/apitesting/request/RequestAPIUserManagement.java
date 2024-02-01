@@ -43,6 +43,12 @@ public class RequestAPIUserManagement {
         System.out.println("Gson :" + payload.toJson(dataUserUpdate));
         System.out.println(endpoint);
         setUpHeader(); // set up header
-        return  request.body(payload.toJson(dataUserUpdate)).when().put(endpoint); // call API create user
+        return  request.body(payload.toJson(dataUserUpdate)).when().put(endpoint); // call API edit user
+    }
+
+    public static Response deleteUserById(String url, String idUser) {
+        String endpoint = url + idUser;
+        setUpHeader(); // set up header
+        return request.when().delete(endpoint); // call API to get delete user by id
     }
 }

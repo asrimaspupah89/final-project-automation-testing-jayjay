@@ -11,6 +11,7 @@ import testlogic.apitesting.APITestProcessGeneric;
 public class ApiUserStep {
     APIUserTest apiUser;
     UserProfile dataTestCreateUser, dataTestUpdateUser;
+    String currentUserID;
 
     public ApiUserStep(){
         apiUser = new APIUserTest();
@@ -53,7 +54,7 @@ public class ApiUserStep {
     public void validationResponseBodyGetProfileUser() {
         apiUser.checkResponseBodyProfileUser();
     }
-    @Then("validation response body get profile user failed with message {string}")
+    @Then("validation response body get profile user with message {string}")
     public void validationResponseBodyFailedWithMessage(String message) {
         apiUser.checkResponseBodyGetProfileUserFailed(message);
     }
@@ -74,11 +75,23 @@ public class ApiUserStep {
     public void hitApiUpdateProfileUserById(String idUser) {
         dataTestUpdateUser = APITestProcessGeneric.prepareDataUserTestUpdate();
         apiUser.hitAPIUpdateProfileUser(dataTestUpdateUser, idUser);
+        currentUserID = idUser;
     }
 
     @Then("validation response body update user")
     public void validationResponseBodyUpdateUser() {
-        System.out.println("step check response body update user");
-        apiUser.checkResponseBodyUpdateProfileUser(dataTestCreateUser);
+        apiUser.checkResponseBodyUpdateProfileUser(dataTestCreateUser, currentUserID);
+    }
+
+    /***************************** Step Operation For Validation API Post Update User ***************************** */
+    @When("hit api delete user for id {string}")
+    public void hitApiDeleteUserForId(String idUser) {
+        currentUserID = idUser;
+        apiUser.hitAPIDeleteUserById(idUser);
+    }
+
+    @Then("validation response body delete user")
+    public void validationResponseBodyDeleteUser() {
+        apiUser.checkResponseBodyDeleteUser(currentUserID);
     }
 }
