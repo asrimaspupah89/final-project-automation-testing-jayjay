@@ -58,7 +58,7 @@ public class ApiUserStep {
     public void validationResponseBodyGetProfileUser() {
         apiUser.checkResponseBodyProfileUser();
     }
-    @Then("validation response body get profile user with message {string}")
+    @Then("validation response body with message {string}")
     public void validationResponseBodyFailedWithMessage(String message) {
         apiUser.checkResponseBodyGetProfileUserFailed(message);
     }
@@ -104,5 +104,10 @@ public class ApiUserStep {
     @When("hit api get profile user after deleted")
     public void hitApiGetProfileUserAfterDeleted() {
         apiUser.hitAPIGetProfileUser(currentUserID);
+    }
+
+    @When("hit api delete user for id {string}")
+    public void hitApiDeleteUserForId(String idUser) {
+        apiUser.hitAPIDeleteUserById(idUser);
     }
 }

@@ -26,7 +26,7 @@ Feature: Test Automation Rest API User Management
     Given prepare url for "GET_PROFILE_USER"
     When hit api get profile user by id "65bb2ac113492cde6cfbd2d8"
     Then validation status code api user is equals 404
-    Then validation response body get profile user with message "RESOURCE_NOT_FOUND"
+    Then validation response body with message "RESOURCE_NOT_FOUND"
     Then validation response json with JSONSchema "get_profile_user_not_found.json"
 
   @api
@@ -55,4 +55,12 @@ Feature: Test Automation Rest API User Management
     Then validation response body delete user
     Then validation response json with JSONSchema "delete_user_normal.json"
     Then hit api get profile user after deleted
-    Then validation response body get profile user with message "RESOURCE_NOT_FOUND"
+    Then validation response body with message "RESOURCE_NOT_FOUND"
+
+  @api
+  Scenario: Test delete user with user id not found
+    Given prepare url for "DELETE_USER"
+    When hit api delete user for id "65bb2c2213492c3665fbd2f2"
+    Then validation status code api user is equals 404
+    Then validation response body with message "RESOURCE_NOT_FOUND"
+    Then validation response json with JSONSchema "delete_user_not_found.json"

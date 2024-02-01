@@ -19,7 +19,7 @@ public class Utility {
     public static void startDriver() {
         //Initiating your chromedriver
         ChromeOptions options = new ChromeOptions();
-        options.addArguments("--headless"); //  running Chrome via console, and UI Chrome not displayed
+        //options.addArguments("--headless"); //  running Chrome via console, and UI Chrome not displayed
         options.addArguments("--no-sandbox"); // chrome production version
         options.addArguments("--disable-dev-shm-usage");
         options.addArguments("--remote-allow-origins=*"); // allowing to cross domain, so chrome can remoted by selenium
